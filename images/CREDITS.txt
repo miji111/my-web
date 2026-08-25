@@ -1,0 +1,25 @@
+할매공방 — 사진 출처와 라이선스
+
+■ 상품 사진 (흰 배경으로 가공한 것) — 전부 CC0, 출처 표기 의무 없음
+  p-anpan.jpg     ← Wikimedia Commons "Anpan 002.jpg" (Ocdp)                       CC0
+  p-walnut.jpg    ← Wikimedia Commons "Anpan 003.jpg" (Ocdp)                       CC0
+  p-anko.jpg      ← Wikimedia Commons "Koshian.jpg"                                CC0
+  p-salt.jpg      ← rawpixel "Free close one croissant white"                      CC0
+  p-milk.jpg      ← rawpixel "Unflavored low-fat milk"                             CC0
+  p-boricha.jpg   ← rawpixel "Free empty filled tea cup" (왼쪽 잔만 잘라냄)          CC0
+  * 배경을 흰색으로 정규화하고, 900x900 정사각형 안에 여백을 두고 배치했습니다.
+
+■ 인스타그램 칸에 쓴 현장 사진
+  anpan-cut.jpg   ← Wikimedia Commons "Anpan 001.jpg" (Ocdp)                       CC0
+  anpan-whole.jpg ← Wikimedia Commons "Anpan 003.jpg" (Ocdp)                       CC0
+  anko.jpg        ← Wikimedia Commons "Koshian.jpg"                                CC0
+  patjuk.jpg      ← Wikimedia Commons "Patjuk.jpg"                                 CC0
+  salt-bread.jpg  ← Wikimedia Commons "소금빵.jpg"                          CC BY-SA 4.0  ← 표기 필요
+  boricha.jpg     ← Wikimedia Commons "Boricha (barley tea) (cropped).jpg" CC BY-SA 2.0 KR ← 표기 필요
+
+■ 주의
+  CC BY-SA 두 장(salt-bread, boricha)은 실제 서비스로 공개할 때
+  저작자와 라이선스를 페이지 어딘가에 표기해야 합니다.
+  실제 가게 사진으로 같은 파일명에 덮어쓰면 이 의무가 사라집니다.
+
+출처: https://commons.wikimedia.org/ , https://www.rawpixel.com/

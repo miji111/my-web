@@ -1,0 +1,183 @@
+/* ══════════════════════════════════════════════
+   할매공방 — menu.html / subscribe.html 공용 스타일
+   (index.html 은 자체 <style> 을 씁니다)
+   ══════════════════════════════════════════════ */
+
+:root{
+  --pat-deep:#3d1f22;
+  --pat:#6b2f31;
+  --pat-light:#8c4a44;
+  --iron:#2a2523;
+  --wood:#e8d9c3;
+  --wood-light:#f5ece0;
+  --paper:#fffdfa;
+  --line:#eae2d6;
+  --line-strong:#d9cdbb;
+
+  --ink:#221e1c;
+  --ink-mid:#5a524d;
+  --ink-mute:#8b827c;
+  --ink-faint:#b3aaa3;
+
+  --logo:'Black Han Sans',sans-serif;
+  --font:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,
+         system-ui,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+
+  --nav:56px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav) + 16px)}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--font);
+  font-size:15px;font-weight:400;line-height:1.8;letter-spacing:-.015em;
+  word-break:keep-all;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+img{max-width:100%}
+
+.inner{width:min(1080px,92vw);margin:0 auto}
+.narrow{width:min(720px,92vw);margin:0 auto}
+
+/* ── 글자 위계 ── */
+.label{display:block;font-size:.68rem;font-weight:700;letter-spacing:.22em;
+  color:var(--pat-light);text-transform:uppercase}
+h2{font-size:clamp(1.6rem,3.4vw,2.05rem);font-weight:700;line-height:1.35;
+  letter-spacing:-.03em;color:var(--ink)}
+h3{font-size:1.1rem;font-weight:700;line-height:1.45;letter-spacing:-.025em}
+.lead{font-size:1.06rem;font-weight:600;color:var(--ink);line-height:1.75}
+p{color:var(--ink-mid)}
+.mute{font-size:.87rem;font-weight:400;color:var(--ink-mute);line-height:1.75}
+strong{color:var(--pat);font-weight:700}
+.quote{font-size:1rem;font-weight:600;color:var(--pat);line-height:1.6}
+
+.btn{display:inline-block;margin-top:26px;font-size:.88rem;font-weight:600;
+  color:var(--pat);border:1px solid var(--pat-light);padding:11px 26px;
+  border-radius:999px;transition:.2s}
+.btn:hover{background:var(--pat);color:#fff;border-color:var(--pat)}
+
+/* ══════════ 로고 (애니메이션) ══════════ */
+.logobar{background:#fff;padding:30px 0 24px;text-align:center}
+.logo{display:inline-flex;flex-direction:column;align-items:center;gap:4px}
+.logo-mark{position:relative;width:124px;height:112px}
+.logo-mark svg{display:block;width:100%;height:100%}
+
+.lsteam{position:absolute;left:50%;top:2px;transform:translateX(-50%);
+  width:72px;height:30px;pointer-events:none}
+.lsteam span{position:absolute;bottom:0;border-radius:50%;background:#c9bdae;opacity:0;
+  width:7px;height:7px;animation:lrise 4.6s ease-in-out infinite}
+.lsteam span:nth-child(1){left:4%;animation-delay:0s}
+.lsteam span:nth-child(2){left:78%;animation-delay:1.5s;width:9px;height:9px}
+.lsteam span:nth-child(3){left:26%;animation-delay:3s;width:6px;height:6px}
+@keyframes lrise{
+  0%{opacity:0;transform:translate(0,6px) scale(.4)}
+  20%{opacity:.55}
+  60%{opacity:.3;transform:translate(-7px,-20px) scale(1.3)}
+  100%{opacity:0;transform:translate(5px,-36px) scale(2)}
+}
+.stir{transform-box:view-box;transform-origin:68px 10px;
+  animation:stir 3.2s ease-in-out infinite}
+@keyframes stir{
+  0%,100%{transform:rotate(-11deg) translateY(0)}
+  25%{transform:rotate(0deg) translateY(-2px)}
+  50%{transform:rotate(11deg) translateY(0)}
+  75%{transform:rotate(0deg) translateY(2.5px)}
+}
+.swirl{transform-box:view-box;transform-origin:64px 52px;animation:spin 8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bub{transform-box:fill-box;transform-origin:center;animation:bub 2.4s ease-in-out infinite}
+.bub:nth-of-type(2){animation-delay:.9s;animation-duration:3s}
+.bub:nth-of-type(3){animation-delay:1.7s;animation-duration:2.7s}
+@keyframes bub{
+  0%,100%{transform:scale(.2);opacity:0}
+  40%{transform:scale(1);opacity:.9}
+  75%{transform:scale(1.3);opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .lsteam span{animation:none;opacity:.28}
+  .stir,.swirl,.bub{animation:none}
+}
+
+.wordmark{font-family:var(--logo);font-size:1.95rem;font-weight:400;
+  color:var(--pat-deep);line-height:1;letter-spacing:-.01em;margin-top:2px}
+.logo-sub{font-size:.66rem;font-weight:500;letter-spacing:.3em;color:var(--ink-faint);margin-top:8px}
+
+/* ══════════ GNB ══════════ */
+.catebar{position:sticky;top:0;z-index:60;height:var(--nav);
+  background:rgba(255,255,255,.96);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.catebar .inner{display:flex;align-items:center;height:100%;gap:26px}
+.cate-menu{display:flex;align-items:center;gap:26px}
+.cate-menu > li{position:relative;height:var(--nav);display:flex;align-items:center}
+.cate-menu > li > a{font-size:.9rem;font-weight:600;color:var(--ink);letter-spacing:-.02em}
+.cate-menu > li > a:hover{color:var(--pat)}
+.cate-menu .on{color:var(--pat)}
+.cate-menu .on::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--pat)}
+.cate-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.mini-logo{display:none;align-items:center;gap:7px;font-family:var(--logo);
+  font-size:1.2rem;font-weight:400;color:var(--pat-deep);line-height:1;letter-spacing:-.01em}
+.mini-logo svg{width:22px;height:22px}
+.catebar.stuck .mini-logo{display:flex}
+.btn-cta{background:var(--pat);color:#fff;font-size:.8rem;font-weight:600;
+  padding:9px 17px;border-radius:2px;white-space:nowrap}
+.btn-cta:hover{background:var(--pat-deep)}
+.navtoggle{display:none;font-size:.85rem;font-weight:600;letter-spacing:.08em}
+
+/* ══════════ 페이지 머리 ══════════ */
+.pagehead{padding:64px 0 10px;text-align:center}
+.pagehead h1{font-size:clamp(1.9rem,4.6vw,2.7rem);font-weight:800;
+  letter-spacing:-.04em;color:var(--pat-deep);line-height:1.3;margin-top:12px}
+.pagehead .mute{margin-top:14px}
+
+section{padding:64px 0}
+.sec-title{margin-bottom:28px}
+.sec-title h2{margin-top:10px}
+.sec-title .mute{margin-top:8px}
+
+/* ══════════ 푸터 ══════════ */
+footer{background:#fff;border-top:1px solid var(--line);padding:52px 0 44px;margin-top:20px}
+.ft-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:34px}
+.ft-logo{font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:var(--pat-deep);line-height:1}
+.ft-logo + p{margin-top:12px;font-size:.85rem;color:var(--ink-mute);line-height:1.8}
+.ft-grid h4{font-size:.72rem;font-weight:700;letter-spacing:.18em;color:var(--ink);margin-bottom:14px}
+.ft-grid li{margin-bottom:8px}
+.ft-grid li a{font-size:.85rem;color:var(--ink-mute)}
+.ft-grid li a:hover{color:var(--pat)}
+.ft-info{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);
+  font-size:.78rem;color:var(--ink-faint);line-height:1.95}
+/* 본문보다 작게, 한 톤 연하게. 강조하지 않습니다. */
+.grandma{margin-top:22px;font-size:.76rem;color:#c4bcb5;line-height:1.85}
+
+/* 맨 위로 */
+.gotop{position:fixed;right:22px;bottom:26px;z-index:70;width:44px;height:44px;
+  border:1px solid var(--line-strong);border-radius:50%;background:#fff;color:var(--ink-mid);
+  display:flex;align-items:center;justify-content:center;font-size:.95rem;
+  opacity:0;visibility:hidden;transition:.25s;box-shadow:0 6px 18px rgba(34,30,28,.08)}
+.gotop.on{opacity:1;visibility:visible}
+.gotop:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* 커서 따라다니는 단팥빵 */
+.bun-cursor{position:fixed;left:0;top:0;width:63px;height:63px;z-index:200;
+  margin:-31.5px 0 0 -31.5px;pointer-events:none;
+  opacity:0;transition:opacity .4s ease;will-change:transform;
+  filter:drop-shadow(0 4px 8px rgba(61,31,34,.22))}
+.bun-cursor.on{opacity:1}
+.bun-cursor svg{display:block;width:100%;height:100%}
+@media (hover:none),(pointer:coarse){.bun-cursor{display:none}}
+@media (prefers-reduced-motion:reduce){.bun-cursor{display:none}}
+
+@media(max-width:900px){
+  .ft-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .cate-menu{display:none}
+  .navtoggle{display:block}
+  .catebar.open .cate-menu{display:block;position:absolute;top:var(--nav);left:0;right:0;
+    background:#fff;border-bottom:1px solid var(--line);padding:12px 4vw 18px}
+  .catebar.open .cate-menu > li{height:auto;display:block;padding:6px 0}
+  section{padding:52px 0}
+  .ft-grid{grid-template-columns:1fr}
+}

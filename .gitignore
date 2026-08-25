@@ -1,0 +1,19 @@
+# 의존성
+node_modules/
+
+# 비밀값 — MCP API 키 등은 환경변수로만 두세요
+.env
+.env.*
+*.key
+
+# OS / 편집기
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+
+# 작업 중 생긴 임시 파일
+*.log
+*.tmp

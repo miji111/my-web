@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메뉴판 — 할매공방</title>
+<meta name="description" content="거친 단팥빵, 소금빵 단팥, 호두 단팥빵. 손으로 으깬 팥으로 만듭니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* ── 대표 메뉴 크게 ── */
+  .hero-item{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;align-items:center;
+    padding:56px 0;border-top:1px solid var(--line)}
+  .hero-item:first-of-type{border-top:0}
+  .hero-item.flip .shot{order:2}
+  .shot{aspect-ratio:1/1;background:var(--wood-light);border-radius:16px;
+    overflow:hidden;position:relative}
+  .shot img{display:block;width:100%;height:100%;object-fit:cover;
+    transition:transform .6s cubic-bezier(.2,.6,.2,1)}
+  .shot:hover img{transform:scale(1.045)}
+  .badge{position:absolute;top:14px;left:14px;font-size:.68rem;font-weight:700;
+    background:rgba(61,31,34,.82);color:#fff;padding:5px 13px;border-radius:999px;
+    letter-spacing:.04em;backdrop-filter:blur(4px)}
+  .badge.iron{background:rgba(42,37,35,.82)}
+
+  .hero-item h2{margin-top:12px}
+  .hero-item .price{margin-top:10px;font-size:1.2rem;font-weight:800;color:var(--pat);letter-spacing:-.03em}
+  .hero-item .price em{font-style:normal;font-size:.84rem;font-weight:400;
+    color:var(--ink-faint);margin-left:8px}
+  .hero-item p{margin-top:16px;font-size:.95rem}
+  .hero-item .quote{margin-top:20px;padding-top:18px;border-top:1px dashed rgba(107,47,49,.25);
+    font-size:1.1rem}
+
+  .keep-box{margin-top:22px;background:var(--wood-light);border-left:3px solid var(--pat);
+    border-radius:3px;padding:20px 24px}
+  .keep-box .label{margin-bottom:8px}
+  .keep-box p{margin-top:6px;font-size:.9rem}
+
+  /* ── 표 ── */
+  .tablewrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:460px}
+  th,td{text-align:left;padding:15px 12px;border-bottom:1px solid var(--line);font-size:.93rem}
+  th{font-size:.74rem;font-weight:700;letter-spacing:.16em;color:var(--pat-light);
+    text-transform:uppercase;border-bottom:1.5px solid var(--line-strong)}
+  td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+  td.num{font-weight:700;color:var(--pat);white-space:nowrap}
+  td.when{color:var(--ink-mute);font-size:.86rem;white-space:nowrap}
+  td.why{color:var(--ink-mute);font-size:.88rem}
+  tr.free td.num{color:var(--ink-mute)}
+
+  /* ── 추천 조합 ── */
+  .combo{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .combo-card{border:1px solid var(--line);border-radius:3px;padding:26px 28px;background:#fff;
+    transition:.22s}
+  .combo-card:hover{border-color:var(--line-strong);transform:translateY(-3px)}
+  .combo-card .when{font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--pat-light)}
+  .combo-card h3{margin-top:10px;font-size:1.15rem;color:var(--pat-deep)}
+  .combo-card .sum{margin-top:6px;font-size:.95rem;font-weight:700;color:var(--pat)}
+  .combo-card p{margin-top:12px;font-size:.88rem;line-height:1.8}
+  .combo-note{margin-top:20px;font-size:.86rem;color:var(--ink-mute)}
+
+  .cta-row{text-align:center;padding:8px 0 4px}
+
+  @media(max-width:860px){
+    .hero-item{grid-template-columns:1fr;gap:26px;padding:44px 0}
+    .hero-item.flip .shot{order:0}
+    .combo{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ 로고 ══════════ -->
+<div class="logobar">
+  <a href="index.html" class="logo" aria-label="할매공방 홈">
+    <span class="logo-mark">
+      <span class="lsteam" aria-hidden="true"><span></span><span></span><span></span></span>
+      <svg viewBox="0 0 128 112" role="img" aria-label="나무 주걱으로 팥을 휘젓는 무쇠솥">
+        <ellipse cx="64" cy="105" rx="40" ry="4.5" fill="#3d1f22" opacity=".14"/>
+        <path d="M12 56c-5 0-8 4-8 7.5s3 7 8 7" fill="none" stroke="#2a2523" stroke-width="5" stroke-linecap="round"/>
+        <path d="M116 56c5 0 8 4 8 7.5s-3 7-8 7" fill="none" stroke="#2a2523" stroke-width="5" stroke-linecap="round"/>
+        <path d="M12 52h104c0 0-4 38-16 44-6 3-19 4-36 4s-30-1-36-4C16 90 12 52 12 52z" fill="#2a2523"/>
+        <path d="M22 60c2 20 6 32 11 36 5 4 34 5 44 2-13 5-38 4-43-1C29 93 24 74 22 60z" fill="#4a4340" opacity=".42"/>
+        <ellipse cx="64" cy="52" rx="56" ry="13" fill="#2a2523"/>
+        <ellipse cx="64" cy="50.5" rx="56" ry="13" fill="#3a3330"/>
+        <ellipse cx="64" cy="52.5" rx="47" ry="10" fill="#542225"/>
+        <ellipse cx="64" cy="51.5" rx="47" ry="10" fill="#6b2f31"/>
+        <g class="swirl" opacity=".45">
+          <ellipse cx="64" cy="52" rx="32" ry="6.4" fill="none" stroke="#8c4a44" stroke-width="2.4"
+                   stroke-linecap="round" stroke-dasharray="18 100"/>
+          <ellipse cx="64" cy="52" rx="18" ry="3.6" fill="none" stroke="#8c4a44" stroke-width="2"
+                   stroke-linecap="round" stroke-dasharray="11 60"/>
+        </g>
+        <ellipse cx="34" cy="49" rx="2.6" ry="1.8" fill="#8c4a44" opacity=".75"/>
+        <ellipse cx="92" cy="55" rx="2.4" ry="1.6" fill="#8c4a44" opacity=".65"/>
+        <ellipse cx="84" cy="47.5" rx="2.1" ry="1.5" fill="#8c4a44" opacity=".6"/>
+        <circle class="bub" cx="42" cy="48" r="3" fill="#a55c52"/>
+        <circle class="bub" cx="88" cy="54" r="2.6" fill="#a55c52"/>
+        <circle class="bub" cx="46" cy="56" r="2.2" fill="#a55c52"/>
+        <g class="stir">
+          <path d="M55 44h14a4 4 0 0 1 4 4v11a11 11 0 0 1-11 11 11 11 0 0 1-11-11V48a4 4 0 0 1 4-4z" fill="#b8894f"/>
+          <path d="M57.5 45.5h9v13a4.5 4.5 0 0 1-9 0z" fill="#a2763f" opacity=".5"/>
+          <path d="M66.6 8 L71.4 8.9 L65.6 48.5 L60.8 47.6 Z" fill="#c9a06a"/>
+          <path d="M66.6 8 L69 8.4 L63.2 48 L60.8 47.6 Z" fill="#dcb684" opacity=".75"/>
+          <ellipse cx="69" cy="8.4" rx="3.4" ry="2.4" fill="#dcb684"/>
+          <ellipse cx="63" cy="52" rx="17" ry="6.4" fill="#542225"/>
+          <ellipse cx="63" cy="51" rx="17" ry="6.4" fill="#6b2f31"/>
+          <ellipse cx="63" cy="51" rx="17" ry="6.4" fill="none" stroke="#8c4a44" stroke-width="1.4" opacity=".55"/>
+          <ellipse cx="55" cy="50" rx="2.2" ry="1.5" fill="#8c4a44" opacity=".8"/>
+          <ellipse cx="70" cy="53" rx="2" ry="1.4" fill="#8c4a44" opacity=".7"/>
+        </g>
+      </svg>
+    </span>
+    <span class="wordmark">할매공방</span>
+    <span class="logo-sub">SINCE GRANDMA</span>
+  </a>
+</div>
+
+<!-- ══════════ GNB ══════════ -->
+<nav class="catebar" id="catebar">
+  <div class="inner">
+    <a href="index.html" class="mini-logo" aria-label="할매공방">
+      <svg viewBox="0 0 128 104" aria-hidden="true">
+        <ellipse cx="64" cy="44" rx="56" ry="13" fill="#2a2523"/>
+        <path d="M12 44h104c0 0-4 38-16 44-6 3-19 4-36 4s-30-1-36-4C16 82 12 44 12 44z" fill="#2a2523"/>
+        <ellipse cx="64" cy="43" rx="47" ry="10" fill="#6b2f31"/>
+      </svg>
+      할매공방
+    </a>
+
+    <ul class="cate-menu" id="cateMenu">
+      <li><a href="index.html">홈</a></li>
+      <li><a href="menu.html" class="on">메뉴판</a></li>
+      <li><a href="subscribe.html">소식받기</a></li>
+      <li><a href="index.html#contact">오시는 길</a></li>
+    </ul>
+
+    <button class="navtoggle" id="navtoggle" aria-expanded="false">메뉴</button>
+
+    <div class="cate-right">
+      <a href="subscribe.html" class="btn-cta">수첩에 이름 적어두기</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ 페이지 머리 ══════════ -->
+<header class="pagehead">
+  <div class="narrow">
+    <span class="label">Menu</span>
+    <h1>메뉴판</h1>
+    <p class="mute">팥은 손으로 으깹니다. 그래서 매일 만들 수 있는 양이 정해져 있습니다.</p>
+  </div>
+</header>
+
+<!-- ══════════ 대표 메뉴 ══════════ -->
+<section style="padding-top:26px">
+  <div class="inner">
+
+    <article class="hero-item" id="anpan">
+      <div class="shot">
+        <span class="badge">제일 앞줄</span>
+        <img src="images/m-anpan.jpg" alt="손으로 뜯어 벌린 거친 단팥빵. 알갱이째 남긴 팥소가 그대로 보인다.">
+      </div>
+      <div>
+        <span class="label">매일</span>
+        <h2>거친 단팥빵</h2>
+        <p class="price">2,800원 <em>매일 오전 10시 · 오후 3시</em></p>
+        <p class="lead">할머니 방식 그대로. 팥을 완전히 으깨지 않고 절반은 알갱이째 남깁니다.</p>
+        <p class="mute">할머니 손을 지금도 기억합니다. 마디가 굵고 손등에 화상 자국도 있으셨어요.
+        팥을 삶고 나면 뜨거운 채로 나무 주걱으로 눌러 으깨셨거든요.
+        완전히 곱게 갈지 않고, 어떤 알갱이는 그대로 남기고 어떤 건 터뜨리고.
+        <strong>그게 규칙적이지가 않습니다. 사람 손이니까요.</strong></p>
+
+        <div class="keep-box">
+          <span class="label">절대 안 하는 것</span>
+          <h3>기계로 팥을 으깨는 것</h3>
+          <p class="mute">기계로 갈면 그 불규칙함이 사라집니다. 효율은 훨씬 좋아지고 하루에 만들 수 있는 양도 몇 배는 늘 겁니다.
+          근데 그러면 이게 더 이상 할머니 단팥빵이 아니게 됩니다. <strong>그냥 단팥빵이 되는 거죠.</strong></p>
+        </div>
+
+        <p class="quote">“씹는 맛이 있어야 팥빵이지.”</p>
+      </div>
+    </article>
+
+    <article class="hero-item flip" id="salt">
+      <div class="shot">
+        <span class="badge iron">손녀가 만든</span>
+        <img src="images/m-salt.jpg" alt="나무 도마 위에서 갈라 팥소를 채운 소금빵 단팥">
+      </div>
+      <div>
+        <span class="label">매일</span>
+        <h2>소금빵 단팥</h2>
+        <p class="price">3,500원 <em>매일</em></p>
+        <p class="lead">원래는 없던 메뉴입니다. 손녀인 제가 만들었습니다.</p>
+        <p class="mute">할머니 단팥에 요즘 유행하는 소금빵을 결합했습니다.
+        짭짤한 겉껍질과 할머니 팥소가 한 입에 들어옵니다.</p>
+        <p class="quote">“세대가 만나는 빵”</p>
+      </div>
+    </article>
+
+    <article class="hero-item" id="walnut">
+      <div class="shot">
+        <span class="badge">매달 첫째 주에만</span>
+        <img src="images/m-walnut.jpg" alt="반으로 가른 호두 단팥빵. 팥소 사이에 호두가 박혀 있다.">
+      </div>
+      <div>
+        <span class="label">매달 첫째 주 화요일 오전 10시 첫 판</span>
+        <h2>호두 단팥빵</h2>
+        <p class="price">4,000원 <em>매달 첫째 주에만</em></p>
+        <p class="lead">할머니가 명절 때만 특별히 만드시던 빵입니다.<br>기다리는 재미가 있어야 하니까요.</p>
+        <p class="mute">그 주는 문 열기 전부터 다릅니다. 평소엔 무쇠솥에 팥만 삶는데,
+        그 주 화요일 새벽엔 호두를 따로 볶습니다. 고소한 냄새가 팥 냄새 위에 겹쳐지니까,
+        단골들은 문 열기도 전에 냄새로 알아채십니다.</p>
+        <p class="mute">진열대도 달라집니다. 평소엔 거친 단팥빵이 제일 앞줄인데,
+        그 주만큼은 호두 단팥빵을 가운데 놓습니다. <strong>굳이 안내판을 세우진 않습니다.</strong>
+        대신 늘 오시던 분들이 서로 알려주십니다.</p>
+
+        <div class="keep-box">
+          <span class="label">다 팔리고 나면</span>
+          <h3>수첩 한 권이 예약 시스템입니다</h3>
+          <p class="mute">“죄송해요, 오늘은 다 나갔어요. 대신 이거 하나만 약속드릴게요 —
+          다음 달 첫째 주 화요일에 제일 먼저 빼드릴게요. 성함 여쭤봐도 될까요?”</p>
+          <p class="mute">그리고 정말로 작은 수첩에 이름을 적어둡니다.
+          다음 달 그날, 문 열자마자 그분 몫부터 따로 빼놓습니다.</p>
+        </div>
+
+        <p class="quote">“이번 주 그거 나왔대” — 그게 더 좋습니다, 광고보다.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ══════════ 그 외 메뉴 ══════════ -->
+<section id="more" style="background:var(--wood-light);border-block:1px solid var(--line)">
+  <div class="inner">
+    <div class="sec-title">
+      <span class="label">More</span>
+      <h2>그 외 메뉴</h2>
+      <p class="mute">보리차는 나무 진열대 옆 주전자에 늘 있습니다. 셀프입니다.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>메뉴</th><th>가격</th><th>사연</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>팥죽 <span class="mute">(겨울 한정)</span></td>
+            <td class="num">6,000원</td>
+            <td class="why">할머니가 겨울마다 팥 삶던 그 솥에서 그대로 퍼 드립니다.</td>
+          </tr>
+          <tr>
+            <td>단팥 우유</td>
+            <td class="num">4,000원</td>
+            <td class="why">무쇠솥 앞에서 빵 나오길 기다리는 분들 손에 쥐여드리려고 만들었습니다.</td>
+          </tr>
+          <tr>
+            <td>그냥 소금빵</td>
+            <td class="num">2,500원</td>
+            <td class="why">단팥이 부담스럽다는 분들이 계셔서. 반죽은 소금빵 단팥과 같은 것입니다.</td>
+          </tr>
+          <tr>
+            <td>팥소 한 통 <span class="mute">(300g)</span></td>
+            <td class="num">9,000원</td>
+            <td class="why">집에서 직접 해 드시겠다는 분들께. 손으로 으깬 그대로 담습니다.</td>
+          </tr>
+          <tr class="free">
+            <td>보리차</td>
+            <td class="num">무료</td>
+            <td class="why">나무 진열대 옆 주전자에 늘 있습니다. 셀프.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 전체 가격표 ══════════ -->
+<section id="price">
+  <div class="inner">
+    <div class="sec-title">
+      <span class="label">Price</span>
+      <h2>전체 가격표</h2>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>메뉴</th><th>가격</th><th>판매 시기</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>거친 단팥빵</td><td class="num">2,800원</td><td class="when">매일</td></tr>
+          <tr><td>소금빵 단팥</td><td class="num">3,500원</td><td class="when">매일</td></tr>
+          <tr><td>호두 단팥빵</td><td class="num">4,000원</td><td class="when">매달 첫째 주에만</td></tr>
+          <tr><td>그냥 소금빵</td><td class="num">2,500원</td><td class="when">매일</td></tr>
+          <tr><td>단팥 우유</td><td class="num">4,000원</td><td class="when">매일</td></tr>
+          <tr><td>팥죽</td><td class="num">6,000원</td><td class="when">11월~2월</td></tr>
+          <tr><td>팥소 한 통 (300g)</td><td class="num">9,000원</td><td class="when">팥 남는 날만</td></tr>
+          <tr class="free"><td>보리차</td><td class="num">무료</td><td class="when">늘</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 추천 조합 ══════════ -->
+<section id="combo" style="background:var(--wood-light);border-block:1px solid var(--line)">
+  <div class="inner">
+    <div class="sec-title">
+      <span class="label">Together</span>
+      <h2>추천 조합</h2>
+      <p class="mute">세트로 묶어 할인하지는 않습니다. 그냥 이렇게 드시면 좋다는 이야기입니다.</p>
+    </div>
+
+    <div class="combo">
+      <div class="combo-card">
+        <p class="when">처음 오셨다면</p>
+        <h3>거친 단팥빵 + 보리차</h3>
+        <p class="sum">2,800원</p>
+        <p class="mute">다른 거 다 제쳐두고 이것부터. 저희 집이 어떤 집인지는 이 하나로 다 설명됩니다.</p>
+      </div>
+
+      <div class="combo-card">
+        <p class="when">할머니 생각이 나실 때</p>
+        <h3>거친 단팥빵 + 팥죽</h3>
+        <p class="sum">8,800원 <span class="mute">· 겨울에만</span></p>
+        <p class="mute">같은 솥에서 나온 팥을, 씹는 것과 떠먹는 것 두 가지로.</p>
+      </div>
+
+      <div class="combo-card">
+        <p class="when">아이랑 오셨다면</p>
+        <h3>소금빵 단팥 + 단팥 우유</h3>
+        <p class="sum">7,500원</p>
+        <p class="mute">세대가 만나는 빵이니까, 세대가 같이 왔을 때 제일 어울립니다.</p>
+      </div>
+
+      <div class="combo-card">
+        <p class="when">부모님 갖다드릴 때</p>
+        <h3>호두 단팥빵 3개 + 팥소 한 통</h3>
+        <p class="sum">21,000원 <span class="mute">· 매달 첫째 주</span></p>
+        <p class="mute">명절 음식 같은 구성입니다. 종이 상자에 담아드립니다.</p>
+      </div>
+
+      <div class="combo-card">
+        <p class="when">혼자 조용히 있고 싶을 때</p>
+        <h3>소금빵 단팥 + 보리차</h3>
+        <p class="sum">3,500원</p>
+        <p class="mute">라디오 틀어놨으니, 창가 자리에서 천천히 드시다 가세요.</p>
+      </div>
+
+      <div class="combo-card" style="background:var(--iron);border-color:var(--iron)">
+        <p class="when" style="color:rgba(232,217,195,.6)">다 팔린 날에도</p>
+        <h3 style="color:var(--wood-light)">서운하게 보내드리지 않습니다</h3>
+        <p class="mute" style="color:rgba(232,217,195,.72);margin-top:12px">
+        “거친 단팥빵도 똑같이 손으로 으깬 거예요. 서운하게 그냥 보내드리진 않을게요.”</p>
+      </div>
+    </div>
+
+    <p class="combo-note">가격은 그냥 더한 값입니다. 묶어서 깎아드리지는 않습니다.</p>
+  </div>
+</section>
+
+<!-- ══════════ 소식받기 안내 ══════════ -->
+<section style="padding-top:0">
+  <div class="inner">
+    <div class="cta-row">
+      <a href="subscribe.html" class="btn">호두 나오는 주에 문자 받기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 푸터 ══════════ -->
+<footer>
+  <div class="inner">
+    <div class="ft-grid">
+      <div>
+        <p class="ft-logo">할매공방</p>
+        <p>팥이 웃을 때까지 졸입니다.<br>손으로 으깹니다.</p>
+      </div>
+      <div>
+        <h4>먹거리</h4>
+        <ul>
+          <li><a href="menu.html#anpan">거친 단팥빵</a></li>
+          <li><a href="menu.html#salt">소금빵 단팥</a></li>
+          <li><a href="menu.html#walnut">호두 단팥빵</a></li>
+          <li><a href="menu.html#more">그 외 메뉴</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가게 이야기</h4>
+        <ul>
+          <li><a href="index.html#story">시작 이야기</a></li>
+          <li><a href="index.html#keep">지키는 것</a></li>
+          <li><a href="index.html#mood">공간의 분위기</a></li>
+          <li><a href="index.html#guest">손님 이야기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>안내</h4>
+        <ul>
+          <li><a href="index.html#contact">오시는 길</a></li>
+          <li><a href="subscribe.html">소식받기</a></li>
+          <li><a href="tel:02-736-2800">02-736-2800</a></li>
+          <li><a href="https://instagram.com/halmae_gongbang" target="_blank" rel="noopener">인스타그램</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ft-info">
+      할매공방 &nbsp;|&nbsp; 서울 종로구 옥인길 12, 1층 &nbsp;|&nbsp; 전화 02-736-2800<br>
+      카카오톡 채널 @할매공방 &nbsp;|&nbsp; 인스타그램 @halmae_gongbang<br>
+      영업시간 오전 9시 ~ 팥이 떨어질 때까지 (보통 오후 6시쯤) &nbsp;|&nbsp; 매주 일요일 휴무
+    </div>
+
+    <p class="grandma">이 모든 레시피는 정순남 님의 손에서 시작되었습니다.</p>
+  </div>
+</footer>
+
+<button class="gotop" id="gotop" aria-label="맨 위로">↑</button>
+
+<div class="bun-cursor" id="bunCursor" aria-hidden="true">
+  <svg viewBox="0 0 60 60">
+    <ellipse cx="30" cy="46" rx="23" ry="6" fill="#3d1f22" opacity=".16"/>
+    <path d="M6 42c0-14 11-22 24-22s24 8 24 22c0 5-11 8-24 8S6 47 6 42z" fill="#c08c50"/>
+    <path d="M6 40c0-14 11-22 24-22s24 8 24 22c0 5-11 7-24 7S6 45 6 40z" fill="#e0b47b"/>
+    <path d="M12 34c2-8 9-12 18-12" stroke="#f0d3a6" stroke-width="2.6" stroke-linecap="round" fill="none" opacity=".7"/>
+    <ellipse cx="30" cy="26" rx="9" ry="4.4" fill="#f2dcb8"/>
+    <circle cx="26" cy="25.5" r="1.3" fill="#a8783f"/>
+    <circle cx="31" cy="24.4" r="1.3" fill="#a8783f"/>
+    <circle cx="34.5" cy="27" r="1.2" fill="#a8783f"/>
+    <circle cx="28.5" cy="28.4" r="1.1" fill="#a8783f"/>
+  </svg>
+</div>
+
+<script src="site.js"></script>
+</body>
+</html>
